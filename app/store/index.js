@@ -21,7 +21,7 @@ const logger = store => next => action => {
 
 
 // 中间件
-const middlewares = [thunk,logger];
+const middlewares = [thunk];
 
 // 创建store
 export default createStore(reducers,applyMiddleware(...middlewares));

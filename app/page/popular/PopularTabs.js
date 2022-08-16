@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import PopularScreen from './PopularScreen';
 import { View,Text,StyleSheet } from 'react-native';
-import {connect} from 'react-redux';
-import actions from '../../action/index';
 
 const PopTab = createMaterialTopTabNavigator();
 
@@ -32,17 +30,3 @@ export default class PopularTabs extends Component {
     );
   }
 }
-
-const mapStateToProps = state => ({
-  popular: state.popular
-});
-
-const mapDispatchToProps = state => ({
-  onLoadPopulatData: (storeName, url) => dispatch(actions.onLoadPopularData(storeName, url))
-});
-
-const PopularTabPage = connect(mapStateToProps, mapDispatchToProps)(PopularTabs)
-
-const styles = StyleSheet.create({
-
-})

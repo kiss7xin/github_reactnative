@@ -11,6 +11,17 @@ export default class MyPage extends Component {
         title={'跳转Tag'}
         onPress={()=>navigation.navigate('Tag')}
         />
+        <Button title={'fetch'} onPress={()=> {
+          navigation.navigate('FetchDemoPage');
+        }}>Fetch 使用</Button>
+
+        <Button title={'storage'} onPress={()=> {
+          navigation.navigate('AsyncStorageDemoPage');
+        }}>AsyncStorage 使用</Button>
+
+        <Button title={'datastore'} onPress={()=> {
+          navigation.navigate('DataStoreDemoPage');
+        }}>DataStore 使用</Button>
       </View>
     )
   }
