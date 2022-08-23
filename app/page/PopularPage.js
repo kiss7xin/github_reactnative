@@ -5,19 +5,29 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 import { connect } from 'react-redux';
 import actions from '../action/index';
 import PopularItem from '../common/PopularItem';
+import NavigationBar from '../common/NavigationBar';
 
 const URL = 'https://api.github.com/search/repositories?q=';
 const QUERY_STR = '&sort=stars';
-const THEME_COLOR = 'red';
+const THEME_COLOR = '#678';
 
 // 导航视图
 const PopularStack = createNativeStackNavigator();
 
 export default class PopularNavPage extends Component {
   render() {
+    let statusBar = {
+      backgroundColor: THEME_COLOR,
+      barStyle: 'light-content',
+    };
+    let navigationBar = <NavigationBar 
+    title={'最热'}
+    statusBar={statusBar}
+    style={{backgroundColor: THEME_COLOR}}
+    />
     return (
       <PopularStack.Navigator initialRouteName='PopularPage'>
-        <PopularStack.Screen key="PopularPage" name="PopularPage" component={PopularPage} />
+        <PopularStack.Screen key="PopularPage" name="PopularPage" component={PopularPage} options={{header: (props) => navigationBar}} />
       </PopularStack.Navigator>
     )
   }
@@ -30,8 +40,8 @@ const PopTab = createMaterialTopTabNavigator();
 class PopularPage extends Component {
   constructor(props) {
     super(props)
-    // this.tabNames = ['Java', 'Android', 'iOS', 'React', 'React Native', 'Uniapp', 'Flutter']
-    this.tabNames = ['Java']
+    this.tabNames = ['Java', 'Android', 'iOS', 'React', 'React Native', 'Uniapp', 'Flutter']
+    // this.tabNames = ['Java']
   }
   render() {
     const tabNames = this.tabNames;
@@ -40,9 +50,10 @@ class PopularPage extends Component {
         initialRouteName="Popular1"
         screenOptions={{
           tabBarScrollEnabled: true,
-          tabBarActiveTintColor: 'white',
+          tabBarActiveTintColor: 'blue',
+          tabBarInactiveTintColor: 'gray',
           tabBarLabelStyle: { fontSize: 12 },
-          tabBarStyle: { backgroundColor: '#a67' },
+          tabBarStyle: { backgroundColor: 'white' },
         }}>
         {
           tabNames.map((item) => {
@@ -93,8 +104,9 @@ class PopularTab extends Component {
 
   loadData(loadMore) {
     const { onRefreshPopular,onLoadMorePopular } = this.props;
+    const store = this._store();
     const url = this.genFetchUrl(this.storeName);
-    if (loadMore) {
+    if (loadMore) { 
       onLoadMorePopular(this.storeName,++store.pageIndex,pageSize, store.items, callback => {
         // this.refs.toast.show('没有更多了');
       })
@@ -144,9 +156,20 @@ class PopularTab extends Component {
           }
           ListFooterComponent={()=>this.genIndicator()}
           onEndReached={()=> {
+            console.log('---onEndReached---');
+            setTimeout(()=>{
+              if (this.canLoadMore) {
+                this.loadData(true);
+                this.canLoadMore=false;
+              }
+            },100);
             this.loadData(true);
           }}
           onEndReachedThreshold={0.5}
+          onMomentumScrollBegin={()=>{
+            this.canLoadMore = true;//fix初始化页面调用onEndReached多次
+            console.log('---onMomentumScrollBegin---');
+          }}
         />
       </View>
     )

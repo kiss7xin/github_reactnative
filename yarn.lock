@@ -1647,6 +1647,11 @@
   dependencies:
     eslint-visitor-keys "^1.1.0"
 
+GitHubTrending@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/GitHubTrending/-/GitHubTrending-5.0.0.tgz#d272acf5b134dc0dab24a8877577223462054809"
+  integrity sha512-7kmSPC3jbtaMiJh3blAt0HS1iGlP8LiIzUD1fmEs2WbnH9mE36HLn+eQXRdqXHie6+xwJfw9t4Bwk4MWB/0dxQ==
+
 abab@^2.0.3, abab@^2.0.5:
   version "2.0.6"
   resolved "https://registry.npmjs.org/abab/-/abab-2.0.6.tgz"
@@ -5664,7 +5669,7 @@ prompts@^2.0.1, prompts@^2.4.0:
 
 prop-types@^15.7.2, prop-types@^15.8.1:
   version "15.8.1"
-  resolved "https://registry.npmjs.org/prop-types/-/prop-types-15.8.1.tgz"
+  resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.8.1.tgz#67d87bf1a694f48435cf332c24af10214a3140b5"
   integrity sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==
   dependencies:
     loose-envify "^1.4.0"
