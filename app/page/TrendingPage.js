@@ -7,8 +7,7 @@ import actions from '../action/index';
 import PopularItem from '../common/PopularItem';
 import NavigationBar from '../common/NavigationBar';
 
-const URL = 'https://api.github.com/search/repositories?q=';
-const QUERY_STR = '&sort=stars';
+const URL = 'https://github.com/trending/';
 const THEME_COLOR = '#678';
 
 // 导航视图
@@ -21,7 +20,7 @@ export default class TrendingNavPage extends Component {
       barStyle: 'light-content',
     };
     let navigationBar = <NavigationBar 
-    title={'最热'}
+    title={'趋势'}
     statusBar={statusBar}
     style={{backgroundColor: THEME_COLOR}}
     />
@@ -40,14 +39,13 @@ const PopTab = createMaterialTopTabNavigator();
 class TrendingPage extends Component {
   constructor(props) {
     super(props)
-    this.tabNames = ['Java', 'Android', 'iOS', 'React', 'React Native', 'Uniapp', 'Flutter']
-    // this.tabNames = ['Java']
+    this.tabNames = ['All', 'C', 'JavaScript']
   }
   render() {
     const tabNames = this.tabNames;
     return (
       <PopTab.Navigator
-        initialRouteName="Trending1"
+        initialRouteName="Trending"
         screenOptions={{
           tabBarScrollEnabled: true,
           tabBarActiveTintColor: 'blue',
@@ -86,7 +84,6 @@ class TrendingTab extends Component {
   _store() {
     const { trending } = this.props;
     let store = trending[this.storeName];
-    console.log("store:" + JSON.stringify(store));
     if (!store) {
       store = {
         items: [],
@@ -99,7 +96,7 @@ class TrendingTab extends Component {
   }
 
   genFetchUrl(key) {
-    return URL + key + QUERY_STR;
+    return URL + key + '?since=daily';
   }
 
   loadData(loadMore) {

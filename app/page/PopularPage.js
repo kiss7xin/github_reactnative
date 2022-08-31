@@ -86,7 +86,6 @@ class PopularTab extends Component {
   _store() {
     const { popular } = this.props;
     let store = popular[this.storeName];
-    console.log("store:" + JSON.stringify(store));
     if (!store) {
       store = {
         items: [],

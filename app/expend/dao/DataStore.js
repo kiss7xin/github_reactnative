@@ -97,12 +97,14 @@ export default class DataStore {
             } else {
                 new Trending().fetchTrending(url)
                 .then(items=>{
+                    console.log('items:' + items)
                     if (!items) {
                         throw new Error('responseData is null');
                     }
                     this.saveData(url, items);
                     resolve(items);
                 }).catch((error)=> {
+                    console.log('error:' + error)
                     reject(error);
                 })
             }
